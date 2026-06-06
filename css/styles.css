@@ -280,6 +280,163 @@ img { max-width: 100%; display: block; }
 .step h3 { font-size: 1.2rem; margin-bottom: .6rem; }
 .step p { color: var(--muted); font-size: .95rem; }
 
+/* ===== Coaching-Pakete (Pricing) ===== */
+.pricing { text-align: center; }
+
+.pricing__sub {
+  color: var(--muted);
+  margin: -1.5rem 0 2rem;
+  font-size: 1.05rem;
+}
+
+.pricing__toggle {
+  display: inline-flex;
+  gap: .3rem;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: .3rem;
+  margin-bottom: 2.5rem;
+}
+
+.pricing__term {
+  background: none;
+  border: none;
+  border-radius: 999px;
+  color: var(--muted);
+  font-family: var(--font-body);
+  font-size: .9rem;
+  font-weight: 600;
+  padding: .55rem 1.2rem;
+  cursor: pointer;
+  transition: background .2s, color .2s;
+}
+
+.pricing__term:hover { color: var(--text); }
+
+.pricing__term.is-active {
+  background: var(--accent);
+  color: #fff;
+}
+
+.pricing__discount {
+  font-size: .78rem;
+  opacity: .85;
+}
+
+.pricing__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  align-items: stretch;
+  text-align: left;
+}
+
+.plan {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 2.2rem 1.8rem;
+  transition: transform .25s, border-color .25s;
+}
+
+.plan:hover { border-color: var(--accent); }
+
+.plan--popular {
+  border: 2px solid var(--accent);
+  transform: scale(1.04);
+  box-shadow: 0 12px 40px rgba(227, 36, 43, .15);
+}
+
+.plan--popular:hover { transform: scale(1.06); }
+
+.plan__badge {
+  position: absolute;
+  top: -.85rem;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--accent);
+  color: #fff;
+  font-size: .75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .12em;
+  padding: .3rem 1rem;
+  border-radius: 999px;
+}
+
+.plan__name {
+  font-family: var(--font-head);
+  font-size: 1.5rem;
+  letter-spacing: .05em;
+  margin-bottom: 1rem;
+}
+
+.plan__price {
+  display: flex;
+  align-items: baseline;
+  gap: .5rem;
+  flex-wrap: wrap;
+}
+
+.plan__old { color: var(--muted); font-size: 1rem; }
+
+.plan__amount {
+  font-family: var(--font-head);
+  font-size: 2.8rem;
+  color: var(--accent);
+  line-height: 1;
+}
+
+.plan__period { color: var(--muted); font-size: .95rem; }
+
+.plan__tax {
+  color: #666;
+  font-size: .78rem;
+  margin: .3rem 0 1rem;
+}
+
+.plan__target {
+  color: var(--text);
+  font-weight: 600;
+  font-size: .95rem;
+  margin-bottom: 1.2rem;
+  min-height: 2.6em;
+}
+
+.plan__features {
+  list-style: none;
+  margin-bottom: 1.8rem;
+  flex: 1;
+}
+
+.plan__features li {
+  position: relative;
+  padding-left: 1.7rem;
+  color: var(--muted);
+  font-size: .93rem;
+  margin-bottom: .65rem;
+}
+
+.plan__features li::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  color: #2ecc71;
+  font-weight: 700;
+}
+
+.plan__cta { justify-content: center; }
+
+.pricing__note {
+  color: var(--muted);
+  font-size: .9rem;
+  margin-top: 2.5rem;
+}
+
 /* ===== Transformationen ===== */
 .transformations { background: var(--bg-alt); }
 
@@ -544,6 +701,12 @@ img { max-width: 100%; display: block; }
   transform: none;
 }
 
+/* Beliebt-Karte: Skalierung hat Vorrang vor der Reveal-Animation */
+@media (min-width: 901px) {
+  .plan--popular.is-visible { transform: scale(1.04); }
+  .plan--popular.is-visible:hover { transform: scale(1.06); }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .reveal { opacity: 1; transform: none; transition: none; }
   html { scroll-behavior: auto; }
@@ -555,6 +718,9 @@ img { max-width: 100%; display: block; }
   .about__image { max-width: 420px; margin-inline: auto; }
   .features__grid { grid-template-columns: repeat(2, 1fr); }
   .sponsors__grid { grid-template-columns: 1fr; }
+  .pricing__grid { grid-template-columns: 1fr; max-width: 440px; margin-inline: auto; }
+  .plan--popular { transform: none; }
+  .plan--popular:hover { transform: translateY(-4px); }
   .transformations__grid { grid-template-columns: 1fr; gap: 1rem; }
   .steps__grid { grid-template-columns: 1fr; gap: 2rem; }
 }
@@ -591,4 +757,6 @@ img { max-width: 100%; display: block; }
   .newsletter__form { flex-direction: column; }
   .newsletter__form .btn { justify-content: center; }
   .transformations__grid { grid-template-columns: 1fr; }
+  .pricing__toggle { flex-wrap: wrap; justify-content: center; border-radius: 16px; }
+  .pricing__term { padding: .5rem .9rem; font-size: .85rem; }
 }
