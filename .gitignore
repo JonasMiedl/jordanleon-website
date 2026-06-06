@@ -1,0 +1,6 @@
+﻿# Niemals Schluessel/Zertifikate committen
+*.key
+*.pem
+*.pfx
+*.crt
+*.cer
