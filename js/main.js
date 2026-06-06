@@ -40,6 +40,31 @@ const observer = new IntersectionObserver(
 
 document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
 
+// Transformationen: Karten ohne Bild ausblenden, Sektion verstecken wenn leer
+const transformationsSection = document.getElementById('transformationen');
+
+if (transformationsSection) {
+  const cards = transformationsSection.querySelectorAll('.transformation');
+  let missing = 0;
+
+  const hideSectionIfEmpty = () => {
+    if (missing === cards.length) {
+      transformationsSection.style.display = 'none';
+      const navLink = document.querySelector('[data-nav="transformationen"]');
+      if (navLink) navLink.style.display = 'none';
+    }
+  };
+
+  cards.forEach((card) => {
+    const img = card.querySelector('img');
+    img.addEventListener('error', () => {
+      card.remove();
+      missing++;
+      hideSectionIfEmpty();
+    });
+  });
+}
+
 // Partner-Codes kopieren
 document.querySelectorAll('.sponsor__copy').forEach((btn) => {
   btn.addEventListener('click', async () => {
