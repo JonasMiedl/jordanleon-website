@@ -25,6 +25,30 @@ links.querySelectorAll('a').forEach((a) =>
   })
 );
 
+// Hero-Videos: Clips wechseln sich nach jedem Durchlauf mit Überblendung ab
+const heroMedia = document.getElementById('heroMedia');
+
+if (heroMedia) {
+  const videos = [...heroMedia.querySelectorAll('.hero__video')];
+
+  videos.forEach((video, i) => {
+    video.addEventListener('ended', () => {
+      const next = videos[(i + 1) % videos.length];
+      next.currentTime = 0;
+      next.play().catch(() => {});
+      next.classList.add('is-active');
+      video.classList.remove('is-active');
+    });
+  });
+
+  // Autoplay-Fallback (z. B. Energiesparmodus): beim ersten Tippen/Klicken starten
+  const kickstart = () => {
+    const active = videos.find((v) => v.classList.contains('is-active'));
+    if (active && active.paused) active.play().catch(() => {});
+  };
+  document.addEventListener('pointerdown', kickstart, { once: true });
+}
+
 // Reveal-Animationen beim Scrollen
 const observer = new IntersectionObserver(
   (entries) => {
