@@ -135,11 +135,22 @@ img { max-width: 100%; display: block; }
   display: flex;
   align-items: center;
   position: relative;
+  /* Dunkler Verlauf von links für Textlesbarkeit über dem Hintergrundbild */
   background:
-    radial-gradient(ellipse 60% 50% at 75% 35%, rgba(227, 36, 43, .18), transparent 70%),
-    radial-gradient(ellipse 50% 40% at 20% 80%, rgba(227, 36, 43, .08), transparent 70%),
+    linear-gradient(90deg, var(--bg) 0%, rgba(10, 10, 10, .85) 30%, rgba(10, 10, 10, .35) 60%, rgba(10, 10, 10, .15) 100%),
+    url("../assets/hero-bg.jpg") center right / cover no-repeat,
     var(--bg);
   padding: 7rem 0 4rem;
+}
+
+/* Weicher Übergang zum nächsten Abschnitt */
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 0 0;
+  height: 120px;
+  background: linear-gradient(180deg, transparent, var(--bg));
+  pointer-events: none;
 }
 
 .hero__kicker {
@@ -714,6 +725,13 @@ img { max-width: 100%; display: block; }
 
 /* ===== Responsive ===== */
 @media (max-width: 900px) {
+  /* Mobil liegt der Text über dem Bild → stärkeres, flächiges Overlay */
+  .hero {
+    background:
+      linear-gradient(180deg, rgba(10, 10, 10, .75) 0%, rgba(10, 10, 10, .55) 55%, var(--bg) 100%),
+      url("../assets/hero-bg.jpg") center right 35% / cover no-repeat,
+      var(--bg);
+  }
   .about__grid { grid-template-columns: 1fr; gap: 2.5rem; }
   .about__image { max-width: 420px; margin-inline: auto; }
   .features__grid { grid-template-columns: repeat(2, 1fr); }
